@@ -5,6 +5,16 @@
     <link>https://kaiogerhardt.dev.br/authors/</link>
     <description>Recent content in Authors on Kaio Gerhardt</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language><atom:link href="https://kaiogerhardt.dev.br/authors/index.xml" rel="self" type="application/rss+xml" />
+    <language>en</language>
+    <lastBuildDate>Wed, 08 Dec 2021 11:17:25 -0300</lastBuildDate><atom:link href="https://kaiogerhardt.dev.br/authors/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Kaio Gerhardt</title>
+      <link>https://kaiogerhardt.dev.br/authors/kaio-gerhardt/</link>
+      <pubDate>Wed, 08 Dec 2021 11:17:25 -0300</pubDate>
+      
+      <guid>https://kaiogerhardt.dev.br/authors/kaio-gerhardt/</guid>
+      <description></description>
+    </item>
+    
   </channel>
 </rss>

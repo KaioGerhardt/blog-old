@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>
+  Guia Introdutório de Virtualenv · Kaio Gerhardt
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Kaio Gerhardt">
+<meta name="description" content="INtrodução ao ambiente virtual do Python.">
+<meta name="keywords" content="blog,developer,personal">
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Guia Introdutório de Virtualenv"/>
+<meta name="twitter:description" content="INtrodução ao ambiente virtual do Python."/>
+
+<meta property="og:title" content="Guia Introdutório de Virtualenv" />
+<meta property="og:description" content="INtrodução ao ambiente virtual do Python." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kaiogerhardt.dev.br/posts/guia-introdutorio-de-virtualenv/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-12-08T11:17:25-03:00" />
+<meta property="article:modified_time" content="2021-12-08T11:17:25-03:00" />
+
+
+
+
+
+<link rel="canonical" href="https://kaiogerhardt.dev.br/posts/guia-introdutorio-de-virtualenv/">
+
+
+<link rel="preload" href="/fonts/forkawesome-webfont.woff2?v=1.2.0" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.min.e1bdf152d93b060b06ba5d496486ed9c201a8b95d335e035beb5faebe3b61cad.css" integrity="sha256-4b3xUtk7BgsGul1JZIbtnCAai5XTNeA1vrX66&#43;O2HK0=" crossorigin="anonymous" media="screen" />
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.min.a00e6364bacbc8266ad1cc81230774a1397198f8cfb7bcba29b7d6fcb54ce57f.css" integrity="sha256-oA5jZLrLyCZq0cyBIwd0oTlxmPjPt7y6KbfW/LVM5X8=" crossorigin="anonymous" media="screen" />
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="/">
+      Kaio Gerhardt
+    </a>
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/about/">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/projects/">Projects</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/contact/">Contact me</a>
+            </li>
+          
+        
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="https://kaiogerhardt.dev.br/posts/guia-introdutorio-de-virtualenv/">
+              Guia Introdutório de Virtualenv
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+              <time datetime="2021-12-08T11:17:25-03:00">
+                08/12/2021
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa fa-clock-o" aria-hidden="true"></i>
+              4-minute read
+            </span>
+          </div>
+          <div class="authors">
+  <i class="fa fa-user" aria-hidden="true"></i>
+    <a href="/authors/kaio-gerhardt/">Kaio Gerhardt</a></div>
+
+          
+          
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>Quando estamos desenvolvendo uma aplicação de modo geral, é muito comum utilizarmos diversas bibliotecas para facilitar e até agilizar o processo. Com a linguagem Python isso não seria diferente.</p>
+<p>Durante o desenvolvimento de um projeto, podemos utilizar diversas bibliotecas, algumas vezes repetidas, em versões diferentes. Como por exemplo, poderíamos desenvolver dois projetos, para melhor entendimento vamos chamar de &ldquo;projeto X&rdquo; e &ldquo;projeto Y&rdquo;. No projeto Y utilizamos a biblioteca mysqlclient na versão 1.0, e no projeto X utilizamos a mesma biblioteca na versão 1.5.</p>
+<p>Isso acaba sendo algo complexo para o Sistema Operacional gerenciar e geralmente acaba causando incompatibilidade com alguma das versões. Sendo uma das soluções para este problema a utilização de diferentes ambientes virtuais.</p>
+<h2 id="o-que-é-a-virtualenv">
+  O que é a Virtualenv?
+  <a class="heading-link" href="#o-que-%c3%a9-a-virtualenv">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>A Virtualenv nada mais é do que um ambiente virtual de desenvolvimento. Onde este ambiente virtual empacota todas as dependências que um projeto utiliza e armazena em um diretório especifico. Fazendo com que assim, nenhum pacote seja instalado no Sistema Operacional, não gerando incompatibilidade.</p>
+<p>Com isso, cada projeto pode ter o seu ambiente virtual com suas dependências e suas bibliotecas em versões especificas. Facilitando também a implementação e utilização do projeto em outra máquina, pois assim o projeto vai com todas as suas necessidades sem precisar instalar nada em outra maquina.</p>
+<h2 id="mas-como-funciona-a-virtualenv">
+  Mas como funciona a Virtualenv?
+  <a class="heading-link" href="#mas-como-funciona-a-virtualenv">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>De maneira simples, o ambiente virtual realiza uma cópia de tudo o que um programa na linguagem Python precisa para executar.</p>
+<p>Esta cópia inclui:</p>
+<ol>
+<li>O código fonte do seu projeto, escrito por você;</li>
+<li>PIP (que é o gerenciado de pacotes do python);</li>
+<li>Bibliotecas padrão do Python;</li>
+<li>Versão utilizada do Python;</li>
+<li>E as bibliotecas instaladas com o Python.</li>
+</ol>
+<h2 id="como-instalar-a-virtualenv">
+  Como instalar a virtualenv?
+  <a class="heading-link" href="#como-instalar-a-virtualenv">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>A instalação se dá pelo gerenciador de pacotes do Python, o PIP, de maneira bem simples. Para instalar é necessário apenas que utilize o comando abaixo no seu terminal.</p>
+<p><code>pip install virtualenv</code></p>
+<p>Com isso, a Virtualenv será instalada e vai estar pronta pra ser utilizada.</p>
+<h2 id="como-criar-uma-nova-virtualenv">
+  Como criar uma nova virtualenv?
+  <a class="heading-link" href="#como-criar-uma-nova-virtualenv">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Para a criação de um novo ambiente virutal é bastante simples, é necessário utilizar apenas o comando demonstrado abaixo no terminal do seu Sistema Operacional. Lembrando que é necessário estar dentro do diretório no qual quer que o ambiente seja criado.</p>
+<p><code>virtualenv nome_da_virtualenv</code></p>
+<p>Como por exemplo:
+<code>virtualenv venv1    </code></p>
+<p>Com isso, criamos o ambiente virtual do projeto chamado &ldquo;venv1&rdquo;. É ela que vai comportar todos os pacotes necessários para a execução.</p>
+<h2 id="como-ativar-a-virtualenv">
+  Como ativar a virtualenv?
+  <a class="heading-link" href="#como-ativar-a-virtualenv">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Depois de criar o ambiente é necessário ativa-lo, a &ldquo;ativação&rdquo; do ambiente nada mais é do que entrar no terminal do ambiente. Para a ativação, utilizamos o seguinte comando:</p>
+<p><code>nome_da_virtualenv/Scripts/Activate </code></p>
+<p>No nosso exemplo seria:
+<code>venv1/Scripts/Activate</code></p>
+<p>Ou também, é possível ativar o ambiente navegando pelos diretórios no CMD até chegar no .exe no activate. Sendo o caminha o seguinte:</p>
+<p><code>venv\Scripts</code></p>
+<p>E depois rodar o comando &ldquo;activate&rdquo; no terminal para ativar o ambiente. Após ativar, irá notar que na linha de comando vai aparecer um &ldquo;(venv)&rdquo;, indicando que o ambiente está ativado e que tudo digitando após será aplicado dentro do ambiente.</p>
+<p><code>(venv) C:\Users\Kaio\Desktop\projetox\venv1\Scripts&gt;</code></p>
+<h2 id="como-desativar-o-ambiente-virtual">
+  Como desativar o ambiente virtual?
+  <a class="heading-link" href="#como-desativar-o-ambiente-virtual">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Para desativar o ambiente é bem mais simples do que ativá-lo. Estando dentro do ambiente com a tag &ldquo;(venv)&rdquo; na frente da linha de comando, é necessário apenas rodar o comando &ldquo;deactivate&rdquo; e pronto, ambiente desativado.</p>
+<h2 id="instalando-pacotes">
+  Instalando pacotes!
+  <a class="heading-link" href="#instalando-pacotes">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>A instalação de pacotes por meio gerenciador de pacotes, o PIP, é feito da maneira convencional. Só lembrando que é necessário esta com o ambiente ativado e com a tag &ldquo;(venv)&rdquo; na linha de comando. Para exemplificar, segue abaixo o comando para instalar o pacote pyinstaller no ambiente virtual.</p>
+<p><code>(venv) C:\Users\Kaio\Desktop\projetox\venv1\Scripts&gt; pip install pyinstaller</code></p>
+<h2 id="considerações-finais">
+  Considerações Finais.
+  <a class="heading-link" href="#considera%c3%a7%c3%b5es-finais">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Com este pequeno guia podemos notar o quão fácil é utilizar o virtualenv, e o quanto ele pode facilitar no nosso dia e quanta dor de cabeça pode evitar. Eliminando não apenas a incompatibilidade de projetos, mas também facilitando a utilização do mesmo em outras máquinas.</p>
+
+      </div>
+
+
+      <footer>
+        
+
+
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2022 -
+    
+    2023
+     Kaio Gerhardt 
+    ·
+    
+    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.min.369d90111ae4409b4e51de5efd23a46b92663fcc82dc9a0efde7f70bffc3f949.js" integrity="sha256-Np2QERrkQJtOUd5e/SOka5JmP8yC3JoO/ef3C//D&#43;Uk="></script>
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+
+</html>

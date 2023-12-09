@@ -3556,8 +3556,7 @@ figure {
       .navigation #menu-toggle {
         display: initial;
         position: relative;
-        left: -99999px;
-        opacity: 0; }
+        visibility: hidden; }
         .navigation #menu-toggle:checked + label > i {
           color: #e0e0e0; }
         .navigation #menu-toggle:checked + label + ul {
